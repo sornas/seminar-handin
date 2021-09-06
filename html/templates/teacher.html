@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>Lärarvy</title>
+    <meta charset="utf-8"/>
+    <link href='/static/style.css' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    Top secret!<br>
+    {% for _date, href, name in handins %}
+      <a href="{{ href }}">{{ name }}</a><br>
+    {% endfor %}
+  </body>
+</html>
