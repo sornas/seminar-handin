@@ -23,9 +23,10 @@ def teacher():
     for fpath in glob.glob("handins/*"):
         with open(fpath, "r") as f:
             content = json.load(f)
+            uid = fpath.split("/")[-1]
             handins.append((
                 content["time"],
-                request.url + "/" + fpath,
+                f"/{config.TEACHER_SECRET}/handins/{uid}",
                 content["name"]
             ))
     handins.sort()
