@@ -1,0 +1,62 @@
+A small web application that facilitates sending in tasks during discussion
+seminars I'm currently holding. Currently unnamed.
+
+Requirements
+============
+
+- Python (3.?. Recent-ish)
+- flask (`$ pip install flask`)
+
+Premise
+=======
+
+A larger group of students at a seminar is split into smaller groups of students
+in which they discuss a couple of questions presented by the teacher. Some
+questions might prompt the group to try to implement some code for themselves.
+Later, all groups discuss the questions together, and a group may want to
+present the code they wrote for the others to look at and discuss.
+
+Usage
+=====
+
+Starting is basically 
+
+1. Set the password by creating config.py and writing
+`TEACHER_SECRET="your_password"`.
+
+2. Create the handins directory (`$ mkdir handins`).
+
+3. Run (`$ flask run`).
+
+Deploying flask in debug probably works fine for up-to-medium-sized groups but
+for something larger you want to deploy to production in some way.
+https://flask.palletsprojects.com/en/2.0.x/tutorial/deploy/
+
+Now, let's say the web app is hosted at the URL `example.com`.
+
+The students go to `example.com`, enter their code and group name and press
+"submit".
+
+At `example.com/<password>`, the teacher can see all group names that has
+submitted something as links. Clicking on the link shows the code, and the
+teacher copies the code and shows it for everyone, for example in another editor
+with proper syntax highlighting.
+
+Drawbacks
+=========
+
+Some of these might be fixed in the future, while others might be out of scope.
+
+- No login. The password must be kept secret but can be seen in the URL. A
+  simple password entry would probably be enough.
+- No syntax highlighting or code editing. The former is possible (with JS) while
+  the latter is better handled by an actual editor.
+- No automation. The teacher needs to manually remove the handins when done.
+- No set of tasks to choose from when handing in.
+- No submit confirmation.
+- No spam prevention. It is trivial to overwhelm the server.
+- No notification of when new handins are received. Rather, the teacher has to
+  manually update to see new handins. Automatic HTML reloads could work but some
+  JS would probably be nice.
+- Plain HTML. While we don't need an entire UI framework, some CSS would be
+  nice.
