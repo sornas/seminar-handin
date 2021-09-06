@@ -1,8 +1,8 @@
+from datetime import datetime
 import glob
 import json
 import os
 import random
-import time
 
 from flask import Flask, redirect, render_template, request, url_for
 import werkzeug
@@ -25,7 +25,7 @@ def teacher():
             content = json.load(f)
             uid = fpath.split("/")[-1]
             handins.append((
-                content["time"],
+                datetime.fromisoformat(content["time"]).strftime("%H:%M:%S"),
                 f"/{config.TEACHER_SECRET}/handins/{uid}",
                 content["name"]
             ))
@@ -45,23 +45,23 @@ def teacher_show(uid):
 
 @app.route("/", methods=["GET"])
 def student():
-    return static("html/student.html")
+    return render_template("student.html", handin_received=request.args.get("handin_received"))
 
 
 @app.route("/", methods=["POST"])
 def recv_post():
-    uid = random.randint(1000000000, 9999999999)
-    response = redirect(url_for("student"))
+    uid = str(random.randint(1000000000, 9999999999))
     code, name = request.form["code"], request.form["name"]
     if code == "":
         print(f"{uid}: ignoring empty input from {name}")
-        return response
+        return redirect(url_for("student"))
     print(f"{uid}: received code from {name}")
-    with open("handins/" + str(uid), "w") as f:
+    time = datetime.now()
+    with open("handins/" + uid, "w") as f:
         f.write(json.dumps({
             "code": code.replace("\r\n", "\n"),
             "name": name,
-            "time": time.time_ns(),
+            "time": time.isoformat(),
         }))
     print(f"{uid}: written to file")
-    return response
+    return redirect(url_for("student", handin_received=time.isoformat(" ", timespec="minutes")))

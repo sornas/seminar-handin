@@ -12,5 +12,9 @@
       <input type="text", id="name", name="name">
       <input type="submit", value="Submit">
     </form>
+
+    {% if handin_received != None %}
+      <p class="approved">Handin received at {{handin_received}}!</p>
+    {% endif %}
   </body>
 </html>

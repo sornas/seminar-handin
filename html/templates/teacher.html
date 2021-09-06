@@ -7,8 +7,8 @@
 
   <body>
     Top secret!<br>
-    {% for _date, href, name in handins %}
-      <a href="{{ href }}">{{ name }}</a><br>
+    {% for time, href, name in handins %}
+      <a href="{{ href }}">{{ time }}: {{ name }}</a><br>
     {% endfor %}
   </body>
 </html>
