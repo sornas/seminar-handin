@@ -53,7 +53,6 @@ Some of these might be fixed in the future, while others might be out of scope.
   the latter is better handled by an actual editor.
 - No automation. The teacher needs to manually remove the handins when done.
 - No set of tasks to choose from when handing in.
-- No submit confirmation.
 - No spam prevention. It is trivial to overwhelm the server.
 - No notification of when new handins are received. Rather, the teacher has to
   manually update to see new handins. Automatic HTML reloads could work but some
